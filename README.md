@@ -31,6 +31,10 @@ For instructions on installing and configuring the Minecraft environment, see th
 
 The Minecraft server bundle will be available as `MAUVC_xxxxxxxx.zip` on the project's [GitHub Releases](https://github.com/Leung-Kam-Ho/SAUVC-Automation-Workshop-Exercises/releases) page. Download and set it up by following the included instructions before starting the command server below.
 
+**Minecraft egg control:** In the Minecraft environment, hold the egg while in water to maintain a set depth. Do not use the egg on land, as it can leave the player stuck inside a block. See the [egg control screenshot](media/egggggg.png).
+
+![Minecraft egg control instructions](media/egggggg.png)
+
 1. **Minecraft command server** — translates HTTP movement/camera commands into keyboard input. Start it in a terminal:
    ```bash
    uv run src/Minecraft_Tool/minecraft_command_server.py
