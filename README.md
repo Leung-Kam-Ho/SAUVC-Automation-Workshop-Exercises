@@ -41,7 +41,10 @@ The Minecraft server bundle will be available as `MAUVC_xxxxxxxx.zip` on the pro
    ```
    It listens on port `25565`. Keep Minecraft open and focused so the simulated keyboard input reaches the game. The server and modpack are currently available to workshop participants only.
 
-2. **YOLO detection server** — required for computer-vision exercises. Setup OBS Virtual Camera for streaming Minecraft as a virtual camera, then start the server:
+2. **YOLO detection server** — required for computer-vision exercises. In OBS, add a Window Capture source for the Minecraft window (shown as `[java] Minecraft* 1.21.4` in the screenshot), then start OBS Virtual Camera. Once the game feed is visible in OBS, start the YOLO server:
+
+   ![OBS Virtual Camera setup capturing Minecraft](media/obs_vc.png)
+
    ```bash
    uv run src/YOLO_Tool/yolo_server.py --camera-idx 0
    ```
