@@ -182,3 +182,5 @@ cython_debug/
 
 
 .DS_Store
+behavior_tree_based.*
+camera_preview.jpg
