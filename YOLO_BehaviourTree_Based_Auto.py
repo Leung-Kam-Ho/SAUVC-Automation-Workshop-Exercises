@@ -26,7 +26,7 @@ if __name__ == "__main__":
     tree.setup(timeout=1.0)
 
     # Directory to store rendered tree images
-    path = Path() / "Media"
+    path = Path() / "media"
     path.mkdir(parents=True, exist_ok=True)
     py_trees.display.render_dot_tree(tree.root, name="behavior_tree_based", target_directory=path)
 
@@ -205,7 +205,7 @@ if __name__ == "__main__":
         tree.setup(timeout=1.0)
 
         # Directory to store rendered tree images
-        path = Path() / "Media"
+        path = Path() / "media"
         path.mkdir(parents=True, exist_ok=True)
         py_trees.display.render_dot_tree(tree.root, name="behavior_tree_based", target_directory=path)
 

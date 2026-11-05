@@ -99,7 +99,7 @@ def capture_frames():
     global current_frame
     prev_time = 0
     fps = 0
-    preview_path = Path("Media") / "camera_preview.jpg"
+    preview_path = Path("media") / "camera_preview.jpg"
     preview_path.parent.mkdir(parents=True, exist_ok=True)
     last_preview_time = 0.0
     while cap.isOpened():

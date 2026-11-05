@@ -24,7 +24,7 @@ uv sync
 
 The workshop uses two local HTTP services:
 
-For instructions on installing and configuring the Minecraft environment, see the [Minecraft setup guide](Media/minecraft%20setup.pdf) in `Media/`.
+For instructions on installing and configuring the Minecraft environment, see the [Minecraft setup guide](media/minecraft%20setup.pdf) in `media/`.
 
 The Minecraft server bundle will be available as `MAUVC_xxxxxxxx.zip` on the project's [GitHub Releases](https://github.com/Leung-Kam-Ho/SAUVC-Automation-Workshop-Exercises/releases) page. Download and set it up by following the included instructions before starting the command server below.
 
@@ -38,12 +38,12 @@ The Minecraft server bundle will be available as `MAUVC_xxxxxxxx.zip` on the pro
    ```bash
    uv run src/YOLO_Tool/yolo_server.py --camera-idx 0
    ```
-   Change `0` to the OBS Virtual Camera index; if it does not work, try another index such as `1` or `2`. The server updates `Media/camera_preview.jpg` every second with the latest annotated YOLO output, so you can confirm it is using the correct camera and inspect detections. The server loads `models/best.pt`, serves detections at `http://localhost:4001/detection_info`, and provides an annotated camera stream at `http://localhost:4001/video_feed`. The current inference code uses Apple's MPS device, so the YOLO server requires a compatible Apple Silicon/macOS environment.
+   Change `0` to the OBS Virtual Camera index; if it does not work, try another index such as `1` or `2`. The server updates `media/camera_preview.jpg` every second with the latest annotated YOLO output, so you can confirm it is using the correct camera and inspect detections. The server loads `models/best.pt`, serves detections at `http://localhost:4001/detection_info`, and provides an annotated camera stream at `http://localhost:4001/video_feed`. The current inference code uses Apple's MPS device, so the YOLO server requires a compatible Apple Silicon/macOS environment.
 
 The scripts read service addresses from `user.cfg`. The default Minecraft address is `http://localhost:25565`. For local YOLO inference, set `yolo_url` to `http://localhost:4001/detection_info`; it may be changed to another host if the detector runs on a separate machine. Start the relevant server(s) before running the automation script. The YOLO exercise requires both services.
 
 
-![Minecraft Virtual Environment](Media/Minecraft_Screenshoot.png)
+![Minecraft Virtual Environment](media/Minecraft_Screenshoot.png)
 
 ## Getting Started
 
@@ -55,7 +55,7 @@ The scripts read service addresses from `user.cfg`. The default Minecraft addres
    ```
 
 3. **Explore Behaviour Trees:**
-   Run `uv run python BehaviourTree_Based_Auto.py` to see the Level 2 sequence. It initializes the world, switches camera views, moves forward, turns 180 degrees, and moves forward again. It renders the tree artifacts under `Media/`.
+   Run `uv run python BehaviourTree_Based_Auto.py` to see the Level 2 sequence. It initializes the world, switches camera views, moves forward, turns 180 degrees, and moves forward again. It renders the tree artifacts under `media/`.
 
 4. **Add Computer Vision:**
    Start the YOLO detection server, then run `uv run python YOLO_BehaviourTree_Based_Auto.py`. The current Level 3 file is a scaffold; configure its tree as described below before expecting it to navigate.
