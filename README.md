@@ -26,7 +26,7 @@ The workshop uses two local HTTP services:
 
 For instructions on installing and configuring the Minecraft environment, see the [Minecraft setup guide](Media/minecraft%20setup.pdf) in `Media/`.
 
-The Minecraft server bundle will be available as `minecraft_server.zip` on the project's [GitHub Releases](https://github.com/Leung-Kam-Ho/SAUVC-Automation-Workshop-Exercises/releases) page. Download and set it up by following the included instructions before starting the command server below.
+The Minecraft server bundle will be available as `MAUVC_xxxxxxxx.zip` on the project's [GitHub Releases](https://github.com/Leung-Kam-Ho/SAUVC-Automation-Workshop-Exercises/releases) page. Download and set it up by following the included instructions before starting the command server below.
 
 1. **Minecraft command server** — translates HTTP movement/camera commands into keyboard input. Start it in a terminal:
    ```bash
