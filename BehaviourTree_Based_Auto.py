@@ -7,26 +7,27 @@ from custom_action import (
     SwitchCameraFront,
     SwitchCameraBottom,
     MoveForward,
-    Stop,
+    MoveBackward,
+    MoveLeft,
+    Yaw
 )
 
 
 if __name__ == "__main__":
-    sleep(2)
+    
     node = MinecraftOverrideConfig(override=True)
 
     root = py_trees.composites.Sequence("RootSequence", memory=True)
 
-    # Demo Sequence
     root.add_children([
         InitWorld(node),
         SwitchCameraBottom(node),
         SwitchCameraFront(node),
-        MoveForward(node, 10),
-        Stop(node, 1),
+        MoveForward(node, 15),
+        Yaw(node, -180),
+        MoveForward(node, 3)
     ])
-    
-    # Create the behaviour tree
+
     tree = py_trees.trees.BehaviourTree(root)
     tree.setup(timeout=1.0)
 
@@ -35,13 +36,15 @@ if __name__ == "__main__":
     path.mkdir(parents=True, exist_ok=True)
     py_trees.display.render_dot_tree(tree.root, name="behavior_tree_based", target_directory=path)
 
-    # Setup for ticking and displaying the tree status
     count = 0
-    RATE_HZ = 10.0          # Display update rate
+    RATE_HZ = 20.0          # Display update rate
     TICK_HZ = 20.0         # Actual tick rate (simulatet/apc pitch 0 real-time updates)
     period_display = 1.0 / RATE_HZ
     period_tick = 1.0 / TICK_HZ
 
+    print("Starting in 2 seconds...")
+    sleep(2)
+    print("Starting...")
     last_display = perf_counter()
     next_tick = perf_counter()
 

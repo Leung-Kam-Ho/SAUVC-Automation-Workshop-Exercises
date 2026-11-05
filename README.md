@@ -1,6 +1,6 @@
 # Automation Workshop
 
-This repository serves as an educational resource for learning different approaches to automation, using Minecraft as a practical example. The Minecraft world simulates the SAUVC competition pool setup, providing a safe and accessible environment for testing automation algorithms. The Answer to this workshop can be found [here](https://github.com/Leung-Kam-Ho/Automation-Workshop) with limited access. The workshop covers three progressive levels of automation complexity:
+This repository serves as an educational resource for learning different approaches to automation, using Minecraft as a practical example. The Minecraft world simulates the SAUVC competition pool setup, providing a safe and accessible environment for testing automation algorithms. The answer to this workshop can be found [here](https://github.com/Leung-Kam-Ho/Automation-Workshop) with limited access. The workshop covers three progressive levels of automation complexity:
 
 ## Setup
 
@@ -13,33 +13,50 @@ This repository serves as an educational resource for learning different approac
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/Leung-Kam-Ho/Automastion-Workshop-Exercises.git
-cd automation-workshop-exercises
+git clone https://github.com/Leung-Kam-Ho/SAUVC-Automation-Workshop-Exercises.git
+cd SAUVC-Automation-Workshop-Exercises
 
 # Install dependencies
 uv sync
 ```
 
-### Minecraft Server Setup
-The project communicates with a local Minecraft server running on port 25565. The server simulates ROS-like control by translating commands into keyboard inputs for Minecraft. The CurseForge modpack will be ready later this year to facilitate the setup. ***Right now, the server and the modpack will only be available to participants of the workshop.***
+### Configure and start the services
+
+The workshop uses two local HTTP services:
+
+For instructions on installing and configuring the Minecraft environment, see the [Minecraft setup guide](Media/minecraft%20setup.pdf) in `Media/`.
+
+1. **Minecraft command server** — translates HTTP movement/camera commands into keyboard input. Start it in a terminal:
+   ```bash
+   uv run src/Minecraft_Tool/minecraft_command_server.py
+   ```
+   It listens on port `25565`. Keep Minecraft open and focused so the simulated keyboard input reaches the game. The server and modpack are currently available to workshop participants only.
+
+2. **YOLO detection server** — required for computer-vision exercises. Setup OBS Virtual Camera for streaming Minecraft as a virtual camera, then start the server:
+   ```bash
+   uv run src/YOLO_Tool/yolo_server.py --camera-idx 0
+   ```
+   Change `0` to the OBS Virtual Camera index; if it does not work, try another index such as `1` or `2`. The server updates `Media/camera_preview.jpg` every second with the latest annotated YOLO output, so you can confirm it is using the correct camera and inspect detections. The server loads `models/best.pt`, serves detections at `http://localhost:4001/detection_info`, and provides an annotated camera stream at `http://localhost:4001/video_feed`. The current inference code uses Apple's MPS device, so the YOLO server requires a compatible Apple Silicon/macOS environment.
+
+The scripts read service addresses from `user.cfg`. The default Minecraft address is `http://localhost:25565`. For local YOLO inference, set `yolo_url` to `http://localhost:4001/detection_info`; it may be changed to another host if the detector runs on a separate machine. Start the relevant server(s) before running the automation script. The YOLO exercise requires both services.
 
 
 ![Minecraft Virtual Environment](Media/Minecraft_Screenshoot.png)
 
 ## Getting Started
 
-1. **Start the Minecraft Command Server:**
+1. **Start the Minecraft Command Server** as described above (and the YOLO server for Level 3).
 
 2. **Run Script-Based Automation:**
    ```bash
-   uv run python Script_Based_Auto.py
+   uv run Script_Based_Auto.py
    ```
 
 3. **Explore Behaviour Trees:**
-   Implement your own behaviour tree logic using the `py-trees` library.
+   Run `uv run python BehaviourTree_Based_Auto.py` to see the Level 2 sequence. It initializes the world, switches camera views, moves forward, turns 180 degrees, and moves forward again. It renders the tree artifacts under `Media/`.
 
 4. **Add Computer Vision:**
-   Integrate YOLO for object detection and combine with behaviour trees for advanced automation.
+   Start the YOLO detection server, then run `uv run python YOLO_BehaviourTree_Based_Auto.py`. The current Level 3 file is a scaffold; configure its tree as described below before expecting it to navigate.
 
 ## Workshop Levels
 
@@ -49,7 +66,7 @@ Learn the fundamentals of automation through direct scripting. This approach inv
 
 **Key Files:**
 - `Script_Based_Auto.py` - Demonstrates basic script-based automation with movement sequences
-- `Minecraft_Tool/minecraft_override_config.py` - Client library for sending commands to Minecraft
+- `src/Minecraft_Tool/minecraft_override_config.py` - Client library for sending commands to Minecraft
 
 **Challenges:**
 - **Implement additional movement patterns**
@@ -75,7 +92,8 @@ https://github.com/user-attachments/assets/66ffdf3e-b37d-47a9-95f1-b71e3dbc51e9
 
 
 **Key Files:**
-- `BehaviourTree_Based_Auto.py` - Demonstrates behaviour tree-based automation
+- `BehaviourTree_Based_Auto.py` - Runs a scripted behaviour-tree movement sequence
+- `custom_action.py` - Movement, yaw, camera, detection-check, and detection-guided steering behaviours
    
 **Challenges:**
 - **Implement additional action nodes and composite nodes**
@@ -103,7 +121,10 @@ https://github.com/user-attachments/assets/31a0e1be-5e8b-4d7f-99fe-687d278e4884
 https://github.com/user-attachments/assets/701894db-2eab-4a89-bbbf-bb3235ea5838
 
 **Key Files:**
-- `YOLO_BehaviourTree_Based_Auto.py` - Demonstrates YOLO + behaviour tree automation
+- `YOLO_BehaviourTree_Based_Auto.py` - Behaviour-tree scaffold and commented navigation example for YOLO automation
+- `src/YOLO_Tool/yolo_server.py` - Camera capture, YOLO inference, detection JSON endpoint, and annotated video feed
+- `src/YOLO_Tool/get_detect_info.py` - Client helper for reading detections from the configured YOLO endpoint
+- `models/best.pt` - YOLO weights used by the detection server
 
 **Challenges:**
 - **Integrate YOLO object detection into the behaviour tree**
@@ -114,17 +135,25 @@ https://github.com/user-attachments/assets/701894db-2eab-4a89-bbbf-bb3235ea5838
 **Dependencies:**
 - `ultralytics` - YOLO implementation for object detection
 - `py-trees` - For behaviour tree logic
+- `flask` - HTTP services for Minecraft control and YOLO detections
+- `pynput` - Simulated keyboard input for Minecraft control
+
+> **Note:** `YOLO_BehaviourTree_Based_Auto.py` currently contains an empty active behaviour-tree sequence. The longer gate-and-pail navigation example in that file is provided as commented reference code; build/configure the tree before expecting it to perform a course run.
 
 ## Project Structure
 ```
-├── Minecraft_Tool/
+├── src/Minecraft_Tool/
 │   ├── minecraft_command_server.py    # Flask server for Minecraft control
 │   └── minecraft_override_config.py    # Client library for server communication
+├── src/YOLO_Tool/
+│   ├── yolo_server.py                 # Camera capture and YOLO detection HTTP server
+│   └── get_detect_info.py             # Detection endpoint client
+├── models/best.pt                     # YOLO model weights
 ├── Script_Based_Auto.py                # Level 1: Script-based automation example
 ├── BehaviourTree_Based_Auto.py         # Level 2: Behaviour tree-based automation example
 ├── YOLO_BehaviourTree_Based_Auto.py    # Level 3: YOLO + behaviour tree-based automation example
 ├── custom_action.py                     # Custom action definitions for behaviour trees
-├── main.py                            # Project entry point
+├── user.cfg                           # Local service endpoint configuration
 ├── pyproject.toml                     # Project configuration
 └── README.md                          # This file
 ```
