@@ -18,6 +18,9 @@ cd SAUVC-Automation-Workshop-Exercises
 
 # Install dependencies
 uv sync
+
+# Install the project in editable mode so its src modules are importable
+uv pip install -e .
 ```
 
 ### Configure and start the services
@@ -51,14 +54,14 @@ The scripts read service addresses from `user.cfg`. The default Minecraft addres
 
 2. **Run Script-Based Automation:**
    ```bash
-   uv run Script_Based_Auto.py
+   uv run src/Automation_Script/Script_Based_Auto.py
    ```
 
 3. **Explore Behaviour Trees:**
-   Run `uv run python BehaviourTree_Based_Auto.py` to see the Level 2 sequence. It initializes the world, switches camera views, moves forward, turns 180 degrees, and moves forward again. It renders the tree artifacts under `media/`.
+   Run `uv run src/Automation_Script/BehaviourTree_Based_Auto.py` to see the Level 2 sequence. It initializes the world, switches camera views, moves forward, turns 180 degrees, and moves forward again. It renders the tree artifacts under `media/`.
 
 4. **Add Computer Vision:**
-   Start the YOLO detection server, then run `uv run python YOLO_BehaviourTree_Based_Auto.py`. The current Level 3 file is a scaffold; configure its tree as described below before expecting it to navigate.
+   Start the YOLO detection server, then run `uv run python src/Automation_Script/YOLO_BehaviourTree_Based_Auto.py`. The current Level 3 file is a scaffold; configure its tree as described below before expecting it to navigate.
 
 ## Workshop Levels
 
@@ -67,7 +70,7 @@ The scripts read service addresses from `user.cfg`. The default Minecraft addres
 Learn the fundamentals of automation through direct scripting. This approach involves writing sequential commands to control game actions.
 
 **Key Files:**
-- `Script_Based_Auto.py` - Demonstrates basic script-based automation with movement sequences
+- `src/Automation_Script/Script_Based_Auto.py` - Demonstrates basic script-based automation with movement sequences
 - `src/Minecraft_Tool/minecraft_override_config.py` - Client library for sending commands to Minecraft
 
 **Challenges:**
@@ -94,8 +97,8 @@ https://github.com/user-attachments/assets/66ffdf3e-b37d-47a9-95f1-b71e3dbc51e9
 
 
 **Key Files:**
-- `BehaviourTree_Based_Auto.py` - Runs a scripted behaviour-tree movement sequence
-- `custom_action.py` - Movement, yaw, camera, detection-check, and detection-guided steering behaviours
+- `src/Automation_Script/BehaviourTree_Based_Auto.py` - Runs a scripted behaviour-tree movement sequence
+- `src/Automation_Script/custom_action.py` - Movement, yaw, camera, detection-check, and detection-guided steering behaviours
    
 **Challenges:**
 - **Implement additional action nodes and composite nodes**
@@ -123,7 +126,7 @@ https://github.com/user-attachments/assets/31a0e1be-5e8b-4d7f-99fe-687d278e4884
 https://github.com/user-attachments/assets/701894db-2eab-4a89-bbbf-bb3235ea5838
 
 **Key Files:**
-- `YOLO_BehaviourTree_Based_Auto.py` - Behaviour-tree scaffold and commented navigation example for YOLO automation
+- `src/Automation_Script/YOLO_BehaviourTree_Based_Auto.py` - Behaviour-tree scaffold and commented navigation example for YOLO automation
 - `src/YOLO_Tool/yolo_server.py` - Camera capture, YOLO inference, detection JSON endpoint, and annotated video feed
 - `src/YOLO_Tool/get_detect_info.py` - Client helper for reading detections from the configured YOLO endpoint
 - `models/best.pt` - YOLO weights used by the detection server
@@ -140,10 +143,15 @@ https://github.com/user-attachments/assets/701894db-2eab-4a89-bbbf-bb3235ea5838
 - `flask` - HTTP services for Minecraft control and YOLO detections
 - `pynput` - Simulated keyboard input for Minecraft control
 
-> **Note:** `YOLO_BehaviourTree_Based_Auto.py` currently contains an empty active behaviour-tree sequence. The longer gate-and-pail navigation example in that file is provided as commented reference code; build/configure the tree before expecting it to perform a course run.
+> **Note:** `src/Automation_Script/YOLO_BehaviourTree_Based_Auto.py` currently contains an empty active behaviour-tree sequence. The longer gate-and-pail navigation example in that file is provided as commented reference code; build/configure the tree before expecting it to perform a course run.
 
 ## Project Structure
 ```
+├── src/Automation_Script/
+│   ├── Script_Based_Auto.py             # Level 1: Script-based automation example
+│   ├── BehaviourTree_Based_Auto.py      # Level 2: Behaviour tree-based automation example
+│   ├── YOLO_BehaviourTree_Based_Auto.py # Level 3: YOLO + behaviour tree example
+│   └── custom_action.py               # Custom behaviour-tree actions
 ├── src/Minecraft_Tool/
 │   ├── minecraft_command_server.py    # Flask server for Minecraft control
 │   └── minecraft_override_config.py    # Client library for server communication
@@ -151,10 +159,7 @@ https://github.com/user-attachments/assets/701894db-2eab-4a89-bbbf-bb3235ea5838
 │   ├── yolo_server.py                 # Camera capture and YOLO detection HTTP server
 │   └── get_detect_info.py             # Detection endpoint client
 ├── models/best.pt                     # YOLO model weights
-├── Script_Based_Auto.py                # Level 1: Script-based automation example
-├── BehaviourTree_Based_Auto.py         # Level 2: Behaviour tree-based automation example
-├── YOLO_BehaviourTree_Based_Auto.py    # Level 3: YOLO + behaviour tree-based automation example
-├── custom_action.py                     # Custom action definitions for behaviour trees
+├── main.py                            # Basic project entry point
 ├── user.cfg                           # Local service endpoint configuration
 ├── pyproject.toml                     # Project configuration
 └── README.md                          # This file

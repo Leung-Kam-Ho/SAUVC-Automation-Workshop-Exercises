@@ -26,8 +26,10 @@ class MinecraftOverrideConfig:
                 print("Successfully initialized Minecraft world.")
             else:
                 print(f"Failed to initialize Minecraft world. Status code: {response.status_code}")
+                raise e
         except Exception as e:
             print(f"Error initializing Minecraft world: {e}")
+            raise e
 
     def setpoint(self, angle: float):
         # send request to minecraft server /setpoint endpoint
@@ -38,8 +40,10 @@ class MinecraftOverrideConfig:
                 print("Successfully sent Setpoint message to Minecraft server.")
             else:
                 print(f"Failed to send Setpoint message. Status code: {response.status_code}")
+                raise e
         except Exception as e:
             print(f"Error sending Setpoint message to Minecraft server: {e}")
+            raise e
 
     def switch_camera(self, front=True):
         # send get request to minecraft server /switch_camera endpoint
@@ -49,8 +53,10 @@ class MinecraftOverrideConfig:
                 print("Successfully switched camera on Minecraft server.")
             else:
                 print(f"Failed to switch camera. Status code: {response.status_code}")
+                raise e
         except Exception as e:
             print(f"Error switching camera on Minecraft server: {e}")
+            raise e
 
     def send_twist_message(self, twist_msg : Twist):
         # send request to minecraft server /twist endpoint
@@ -76,7 +82,7 @@ class MinecraftOverrideConfig:
                 print("Successfully sent Twist message to Minecraft server.")
             else:
                 print(f"Failed to send Twist message. Status code: {response.status_code}")
-            
+                raise e
             # if angular z > 0, instead of sending twist, send to /setpoint endpoint with -90 or 90
             if abs(twist_msg.angular.z) > 0.1:
                 angle = 90 if twist_msg.angular.z > 0 else -90
@@ -84,6 +90,7 @@ class MinecraftOverrideConfig:
                 
         except Exception as e:
             print(f"Error sending Twist message to Minecraft server: {e}")
+            raise e
 
 
 # Workshop part 1 - Script-based automation

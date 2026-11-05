@@ -1,0 +1,19 @@
+digraph pastafarianism {
+ordering=out;
+graph [fontname="times-roman"];
+node [fontname="times-roman"];
+edge [fontname="times-roman"];
+RootSequence [label="Ⓜ RootSequence", shape=box, style=filled, fillcolor=orange, fontsize=9, fontcolor=black];
+InitWorld [label=InitWorld, shape=ellipse, style=filled, fillcolor=gray, fontsize=9, fontcolor=black];
+RootSequence -> InitWorld;
+SwitchCameraBottom [label=SwitchCameraBottom, shape=ellipse, style=filled, fillcolor=gray, fontsize=9, fontcolor=black];
+RootSequence -> SwitchCameraBottom;
+SwitchCameraFront [label=SwitchCameraFront, shape=ellipse, style=filled, fillcolor=gray, fontsize=9, fontcolor=black];
+RootSequence -> SwitchCameraFront;
+MoveForward [label=MoveForward, shape=ellipse, style=filled, fillcolor=gray, fontsize=9, fontcolor=black];
+RootSequence -> MoveForward;
+Yaw [label=Yaw, shape=ellipse, style=filled, fillcolor=gray, fontsize=9, fontcolor=black];
+RootSequence -> Yaw;
+"MoveForward*" [label="MoveForward*", shape=ellipse, style=filled, fillcolor=gray, fontsize=9, fontcolor=black];
+RootSequence -> "MoveForward*";
+}
