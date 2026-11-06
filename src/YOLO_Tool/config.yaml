@@ -1,0 +1,52 @@
+camera:
+  index: 1
+  width: 1920
+  height: 1080
+  fps: 30
+  fourcc: MJPG
+
+server:
+  host: 0.0.0.0
+  port: 4001
+
+# stream:
+#   enabled: true
+#   host: 127.0.0.1
+#   port: 5003
+#   width: 854
+#   height: 480
+#   quality: 80
+#   record_dir: null
+#   segment_seconds: 300
+
+# ocr:
+#   pole_url: http://localhost:3601/grid_pole_number
+#   interval: 1.0
+#   save_interval: 2.0
+#   images_dir: images
+
+yolo:
+  model: models/best.pt
+  device: mps
+  confidence: 0.5
+  resize: 0.5
+  classes:
+    Ball:
+      color: [0, 255, 255]
+    Blue flare:
+      color: [255, 140, 0]
+    Blue pail:
+      color: [255, 0, 0]
+      max_count: 1
+    Gate:
+      color: [255, 255, 255]
+      max_count: 1
+    Orange flare:
+      color: [0, 140, 255]
+      max_count: 1
+    Red flare:
+      color: [0, 0, 255]
+    Red pail:
+      color: [0, 0, 139]
+    Yellow flare:
+      color: [0, 255, 255]
