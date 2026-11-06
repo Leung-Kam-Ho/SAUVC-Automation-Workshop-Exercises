@@ -1,6 +1,6 @@
-# Automation Workshop
+# MAUVC Playground
 
-This repository serves as an educational resource for learning different approaches to automation, using Minecraft as a practical example. The Minecraft world simulates the SAUVC competition pool setup, providing a safe and accessible environment for testing automation algorithms.
+MAUVC Playground is an educational resource for exploring different approaches to automation, using Minecraft as a practical example. Its Minecraft world simulates the SAUVC competition pool, providing a safe and accessible environment for developing and testing automation algorithms.
 
 ## Setup
 
