@@ -34,18 +34,18 @@ def init_world():
     """Reset the Minecraft world by setting yaw, pitch and teleporting the player."""
     
     # Randomize Red & Blue Bucket
-    keyboard.type("t")
-    sleep(0.1)
-    keyboard.type("/setblock 1444 57 -3353 minecraft:redstone_block")
-    keyboard.press(Key.enter)
-    keyboard.release(Key.enter)
+    # keyboard.type("t")
+    # sleep(0.1)
+    # keyboard.type("/setblock 1444 57 -3353 minecraft:redstone_block")
+    # keyboard.press(Key.enter)
+    # keyboard.release(Key.enter)
     
-    sleep(0.1)
+    # sleep(0.1)
 
-    # Randomize Red & Blue & Yellow Flare
+    # Randomize All
     keyboard.type("t")
     sleep(0.1)
-    keyboard.type("/setblock 1448 57 -3314 minecraft:redstone_block")
+    keyboard.type("/setblock 1448 57 -3330 minecraft:redstone_block")
     keyboard.press(Key.enter)
     keyboard.release(Key.enter)
     
