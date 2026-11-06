@@ -70,10 +70,18 @@ The Minecraft client and detection helper read service addresses from `user.cfg`
    ```
 
 3. **Explore Behaviour Trees:**
-   Run `uv run src/Automation_Script/BehaviourTree_Based_Auto.py` to see the Level 2 sequence. It initializes the world, switches camera views, moves forward, turns 180 degrees, and moves forward again. It renders the tree artifacts under `media/`.
+   Run 
+   ```
+   uv run src/Automation_Script/BehaviourTree_Based_Auto.py
+   ```
+   to see the Level 2 sequence. It initializes the world, switches camera views, moves forward, turns 180 degrees, and moves forward again. It renders the tree artifacts under `media/`.
 
 4. **Add Computer Vision:**
-   Start the vision service with YOLO enabled in its YAML config, then run `uv run python src/Automation_Script/YOLO_BehaviourTree_Based_Auto.py`. The current Level 3 file is a scaffold; configure its tree as described below before expecting it to navigate.
+   Start the vision service with YOLO enabled in its YAML config, then run
+   ```
+   uv run python src/Automation_Script/YOLO_BehaviourTree_Based_Auto.py
+   ```
+   The current Level 3 file is a scaffold; configure its tree as described below before expecting it to navigate.
 
 ## Workshop Levels
 
