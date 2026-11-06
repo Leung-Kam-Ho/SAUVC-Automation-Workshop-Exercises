@@ -5,7 +5,7 @@ from py_trees.composites import Selector, Sequence,Parallel
 from minecraft.minecraft_override_config import MinecraftOverrideConfig
 from pathlib import Path
 from math import inf
-from actions import (
+from automation_scripts.actions import (
     InitWorld,
     SwitchCameraFront,
     SwitchCameraBottom,

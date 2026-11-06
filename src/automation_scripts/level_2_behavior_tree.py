@@ -2,7 +2,7 @@ from time import sleep, perf_counter
 import py_trees
 from minecraft.minecraft_override_config import MinecraftOverrideConfig
 from pathlib import Path
-from actions import (
+from automation_scripts.actions import (
     InitWorld,
     SwitchCameraFront,
     SwitchCameraBottom,

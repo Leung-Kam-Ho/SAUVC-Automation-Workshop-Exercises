@@ -16,11 +16,8 @@ This repository serves as an educational resource for learning different approac
 git clone https://github.com/Leung-Kam-Ho/SAUVC-Automation-Workshop-Exercises.git
 cd SAUVC-Automation-Workshop-Exercises
 
-# Install dependencies
+# Install dependencies and the project in editable mode
 uv sync
-
-# Install the project in editable mode so its src modules are importable
-uv pip install -e .
 
 # Create machine-specific config files from the checked-in examples
 cp user.example.cfg user.local.cfg
