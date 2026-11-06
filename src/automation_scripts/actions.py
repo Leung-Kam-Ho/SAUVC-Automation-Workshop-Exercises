@@ -2,11 +2,11 @@ from time import time
 try:
     from geometry_msgs.msg import Twist
 except ImportError:
-    from Minecraft_Tool.minecraft_override_config import Twist
+    from minecraft.minecraft_override_config import Twist
     
 import py_trees
-from Minecraft_Tool.minecraft_override_config import MinecraftOverrideConfig
-from YOLO_Tool.get_detect_info import get_detection_info
+from minecraft.minecraft_override_config import MinecraftOverrideConfig
+from vision.get_detect_info import get_detection_info
 
 
 

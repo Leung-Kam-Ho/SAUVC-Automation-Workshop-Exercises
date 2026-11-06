@@ -1,4 +1,4 @@
-from Minecraft_Tool.minecraft_override_config import MinecraftOverrideConfig
+from minecraft.minecraft_override_config import MinecraftOverrideConfig
 from time import sleep
 from geometry_msgs.msg import Twist  # if you are not using ROS, you can comment this line out and create a mock Twist class
 

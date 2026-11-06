@@ -6,7 +6,7 @@ import configparser
 
 
 def get_detection_info():
-    cfg_file_name = "user.cfg"
+    cfg_file_name = "user.local.cfg"
     user_cfg_section = "yolo_config"
     config = configparser.ConfigParser()
     config.read(cfg_file_name)

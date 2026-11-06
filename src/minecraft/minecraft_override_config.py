@@ -11,7 +11,7 @@ class Twist:
 class MinecraftOverrideConfig:
     def __init__(self, override: bool = False):
         self.minecraft_override = override
-        self.cfg_file_name = "user.cfg"
+        self.cfg_file_name = "user.local.cfg"
         self.user_cfg_section = "server_config"
         config = configparser.ConfigParser()
         config.read(self.cfg_file_name)

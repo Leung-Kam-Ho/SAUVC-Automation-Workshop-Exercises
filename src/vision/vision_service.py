@@ -20,8 +20,8 @@ Every option lives in the YAML config. ``--config`` is the only CLI flag; with
 no config file the script uses camera, TCP stream, and recording defaults.
 
 Examples:
-    uv run python utils/vision_service.py
-    uv run --extra yolo python utils/vision_service.py --config utils/config.yaml
+    uv run python src/vision/vision_service.py
+    uv run python src/vision/vision_service.py --config src/vision/config.local.yaml
 """
 
 from __future__ import annotations

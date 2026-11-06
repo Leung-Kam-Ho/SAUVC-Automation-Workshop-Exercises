@@ -1,4 +1,4 @@
-from Minecraft_Tool.minecraft_override_config import MinecraftOverrideConfig
+from minecraft.minecraft_override_config import MinecraftOverrideConfig
 
 
 def main():
